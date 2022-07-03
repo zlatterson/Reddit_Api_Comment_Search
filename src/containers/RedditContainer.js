@@ -5,9 +5,6 @@ import CommunityList from "../components/CommunityList";
 import SearchInput from "../components/SearchInput";
 
 function RedditContainer(){
-    const [threadUrls, setThreadUrls] = useState([])
-    const [threadObjects, setThreadObjects] = useState([])
-
     const [newCommunity, setNewCommunity] = useState('')
     const [communities, setCommunities] = useState([])
     const [selectedCommunity, setSelectedCommunity] = useState(null)
@@ -15,6 +12,8 @@ function RedditContainer(){
     const [comment, setComment] = useState('')
     const [commentSearched, setCommentSearched] = useState('')
 
+    const [threadUrls, setThreadUrls] = useState([])
+    const [threadObjects, setThreadObjects] = useState([])
 
 
 
