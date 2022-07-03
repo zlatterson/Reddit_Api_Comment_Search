@@ -1,13 +1,12 @@
 import React from "react";
 
-const CommunityItem = ({name, communityClicked}) => {
+const CommunityItem = ({name, communityClicked, selectedCommunity}) => {
 
     const handleClick = () => {
         communityClicked(name)
     }
-
     return(
-        <li>
+        <li className={name===selectedCommunity ? "li-selected-community" : "li-community"}>
             <h3 onClick={handleClick}>{name}</h3>
         </li>
     )

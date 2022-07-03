@@ -15,11 +15,13 @@ function SearchInput({setCommentSearched, setComment, comment, commentSearched})
       }
 
     return(
+
         <form onSubmit={newSearch}>
-        <label htmlFor="new-item">Search for a term:</label>
-        <input id="new-item" type="text" onChange={handleSearchInput}/>
+        {/* <label htmlFor="new-item">Search for a term:</label> */}
+        <input id="new-item" type="text" onChange={handleSearchInput} placeholder="Search..."></input>
         <input type="submit" value="Search" />
       </form>
+
     )
 }
 

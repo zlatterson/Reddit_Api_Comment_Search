@@ -25,7 +25,7 @@ function CommentList({threadObjects, commentSearched}){
 
     return(
         <div>
-            <ul>
+            <ul className="ul-comment">
             {commentNodes}
             </ul>
         </div>

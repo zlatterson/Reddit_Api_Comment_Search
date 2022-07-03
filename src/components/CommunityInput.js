@@ -16,9 +16,9 @@ function CommunityInput({communities, setCommunities, newCommunity, setNewCommun
       }
 
     return(
-        <form onSubmit={saveNewItem}>
-        <label htmlFor="new-item">Add a community:</label>
-        <input id="new-item" type="text" onChange={handleSearchInput}/>
+      <form onSubmit={saveNewItem} className="community-form">
+        {/* <label htmlFor="new-item">Add a community:</label> */}
+        <input id="new-item" type="text" onChange={handleSearchInput} placeholder="Add a community..."/>
         <input type="submit" value="Add" />
       </form>
     )

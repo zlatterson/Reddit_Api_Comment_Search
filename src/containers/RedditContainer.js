@@ -27,10 +27,6 @@ function RedditContainer(){
     }
 
     async function getThreadObjects(){
-        // console.log(threadUrls[2])
-        // const response = await fetch (threadUrls[2])
-        // const data = await response.json()
-        // setThreadObjects(data)
         let allComments = []
         for(const thread of threadUrls){
             const response = await fetch (thread)
@@ -43,7 +39,6 @@ function RedditContainer(){
     useEffect(() => {
         getThreadUrls()
         getThreadObjects()
-        // communityClicked()
     }, [comment])
 
     const communityClicked = function(community){
@@ -53,12 +48,17 @@ function RedditContainer(){
 
     return (
         <>
-        <h1>reddit container</h1>
-        {/* {threads} */}
-        <CommunityInput communities={communities} setCommunities={setCommunities} newCommunity={newCommunity} setNewCommunity={setNewCommunity}/>
-        <CommunityList communities={communities} communityClicked={communityClicked}/>
-
+        <div className="header">
+        <h1>Reddit Comment Search</h1>
+        <p>Performs a deep search on comments of a term for the top 25 posts of selected community using .json data</p>
+        <p>1.Enter a community 2.Select a community 3.Enter a term to search comments in the top 25 posts.</p>
+        <div className="header-components">
         <SearchInput setCommentSearched={setCommentSearched} setComment={setComment} comment={comment} commentSearched={commentSearched}/>
+        <CommunityInput communities={communities} setCommunities={setCommunities} newCommunity={newCommunity} setNewCommunity={setNewCommunity}/>
+        </div>
+
+        <CommunityList communities={communities} communityClicked={communityClicked} selectedCommunity={selectedCommunity}/>
+        </div>
         <CommentList threadObjects={threadObjects} commentSearched={commentSearched}/>
         </>
     )
