@@ -6,7 +6,7 @@ import SearchInput from "../components/SearchInput";
 
 function RedditContainer(){
     const [newCommunity, setNewCommunity] = useState('')
-    const [communities, setCommunities] = useState([])
+    const [communities, setCommunities] = useState(['wallstreetbets','pennystocks', 'stocks', 'investing', 'wallstreetbetsOGs'])
     const [selectedCommunity, setSelectedCommunity] = useState(null)
 
     const [comment, setComment] = useState('')
@@ -15,6 +15,7 @@ function RedditContainer(){
     const [threadUrls, setThreadUrls] = useState([])
     const [threadObjects, setThreadObjects] = useState([])
 
+    const [feedback, setFeedback] = useState('')
 
 
     async function getThreadUrls(){
@@ -32,15 +33,16 @@ function RedditContainer(){
             const response = await fetch (thread)
             const data = await response.json()
             console.log('sent')
+            setFeedback('Searching')
             allComments.push(data)
         }
-
+        setFeedback('')
         setThreadObjects(allComments)
 
     }
     useEffect(() => {
         getThreadUrls()
-    }, [commentSearched])
+    }, [commentSearched && selectedCommunity])
 
     useEffect(()=>{
         getThreadObjects()
@@ -64,6 +66,7 @@ function RedditContainer(){
 
         <CommunityList communities={communities} communityClicked={communityClicked} selectedCommunity={selectedCommunity}/>
         </div>
+        <p>{feedback}</p>
         <CommentList threadObjects={threadObjects} commentSearched={commentSearched}/>
         </>
     )
