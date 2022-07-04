@@ -6,6 +6,8 @@ To search stock tickers in investing communities.
 
 ![homepage](https://i.imgur.com/pWZTKqo.png)
 
+# Scrolling through the comments:
+
 ![scrolling-homepage](https://i.imgur.com/vQQnijN.png)
 
 # Errors:
