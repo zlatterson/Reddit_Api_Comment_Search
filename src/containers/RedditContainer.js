@@ -34,12 +34,17 @@ function RedditContainer(){
             console.log('sent')
             allComments.push(data)
         }
+
         setThreadObjects(allComments)
+
     }
     useEffect(() => {
         getThreadUrls()
+    }, [commentSearched])
+
+    useEffect(()=>{
         getThreadObjects()
-    }, [comment])
+    },[threadUrls])
 
     const communityClicked = function(community){
         setSelectedCommunity(community)
