@@ -10,43 +10,35 @@ function RedditContainer(){
     const [selectedCommunity, setSelectedCommunity] = useState(null)
 
     const [comment, setComment] = useState('')
-    const [commentSearched, setCommentSearched] = useState('')
+    const [commentSearched, setCommentSearched] = useState(null)
 
-    const [threadUrls, setThreadUrls] = useState([])
     const [threadObjects, setThreadObjects] = useState([])
 
     const [feedback, setFeedback] = useState('')
 
 
-    async function getThreadUrls(){
-        const response = await fetch (`https://www.reddit.com/r/${selectedCommunity}.json`)
-        const data = await response.json()
-        const foundUrls = data.data.children.map((thread) => {
-            return ('https://www.reddit.com' + thread.data.permalink +'.json')
-        })
-        setThreadUrls(foundUrls)
-    }
+    function getThreadObjects(){
+        setFeedback('Loading')
+        fetch(`https://www.reddit.com/r/${selectedCommunity}.json`)
+          .then(res => res.json())
+          .then((data) => {
+            const promises = data.data.children.map((thread) => {
+              return fetch(`https://www.reddit.com${thread.data.permalink}.json`)
+                .then(res => res.json());
+            });
+        Promise.all(promises)
+        .then((results) => {
+          setThreadObjects(results);
+          setFeedback('')
+        });
+    });
+    };
 
-    async function getThreadObjects(){
-        let allComments = []
-        for(const thread of threadUrls){
-            const response = await fetch (thread)
-            const data = await response.json()
-            console.log('sent')
-            setFeedback('Searching')
-            allComments.push(data)
-        }
-        setFeedback('')
-        setThreadObjects(allComments)
 
-    }
+    
     useEffect(() => {
-        getThreadUrls()
-    }, [commentSearched && selectedCommunity])
-
-    useEffect(()=>{
         getThreadObjects()
-    },[threadUrls])
+    }, [commentSearched && selectedCommunity])
 
     const communityClicked = function(community){
         setSelectedCommunity(community)
