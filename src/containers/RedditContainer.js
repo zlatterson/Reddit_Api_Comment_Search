@@ -33,8 +33,6 @@ function RedditContainer(){
         });
     });
     };
-
-
     
     useEffect(() => {
         getThreadObjects()
@@ -43,7 +41,6 @@ function RedditContainer(){
     const communityClicked = function(community){
         setSelectedCommunity(community)
     }
-
 
     return (
         <>
@@ -58,8 +55,7 @@ function RedditContainer(){
 
         <CommunityList communities={communities} communityClicked={communityClicked} selectedCommunity={selectedCommunity}/>
         </div>
-        <p>{feedback}</p>
-        <CommentList threadObjects={threadObjects} commentSearched={commentSearched}/>
+        <CommentList threadObjects={threadObjects} commentSearched={commentSearched} feedback={feedback}/>
         </>
     )
 }
